@@ -1,0 +1,3 @@
+git config --list
+git config --global user.email "MJL31@geneseo.edu"
+git config --global user.name "MarcusLewis12"
