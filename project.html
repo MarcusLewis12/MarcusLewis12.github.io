@@ -256,68 +256,6 @@ ggplot(BS, aes(x = Contribution)) +
        y = "Frequency")
 
 
-
-2.3 Data Transformation
-climate_finance_transformed <- climate_finance %>%
-  mutate(
-    Year = as.factor(Year),
-    Contribution_Normalized = scales::rescale(Contribution, to = c(0, 1)),
-    Energy_Encoded = as.numeric(Energy),
-    Contribution_Category = cut(Contribution, 
-                                breaks = c(-Inf, 10000, 50000, Inf), 
-                                labels = c('Low', 'Medium', 'High')),
-    Year_Group = ifelse(Year <= 2010, 'Before 2010', 
-                        ifelse(Year <= 2015, '2011-2015', 'After 2015'))
-  )
-
-head(climate_finance_transformed)
-
-# A tibble: 6 × 12
-  Party   Recipient country/reg…¹ Project/programme/ac…² `Type of support` Year 
-  <chr>   <chr>                   <chr>                  <chr>             <fct>
-1 Austria 998 Developing countri… <NA>                   mitigation        2015 
-2 Austria 998 Developing countri… <NA>                   mitigation        2015 
-3 Austria 998 Developing countri… <NA>                   mitigation        2015 
-4 Austria 998 Developing countri… <NA>                   mitigation        2015 
-5 Austria 998 Developing countri… <NA>                   mitigation        2015 
-6 Austria 998 Developing countri… <NA>                   adaptation        2015 
-# ℹ abbreviated names: ¹​`Recipient country/region`,
-#   ²​`Project/programme/activity`
-# ℹ 7 more variables: Contribution <dbl>, Status <chr>, Energy <lgl>,
-#   Contribution_Normalized <dbl>, Energy_Encoded <dbl>,
-#   Contribution_Category <fct>, Year_Group <lgl>
-total_contributions <- aggregate(Contribution ~ Party, data = climate_finance, sum)
-
-least_contributing_country <- total_contributions[which.min(total_contributions$Contribution), ]
-
-print(least_contributing_country)
-
-    Party Contribution
-22 Monaco        25000
-total_contributions <- aggregate(Contribution ~ Party, data = climate_finance, sum)
-
-most_contributing_country <- total_contributions[which.max(total_contributions$Contribution), ]
-
-print(most_contributing_country)
-
-                Party Contribution
-8 European Union (28)  12807587694
-2.4 explanation of the data and website
-Overall this project has been a huge eye-opening experience regarding the difficulty and meticulous efforts to set up a website and code. This data.frame that I have discussed has a very significant importance when it comes to how other countries give aid to others. Countries all over the world have allies. Whether it may be the United States or Russia, but a way to keep in good standing with you’re allies or even countries you may what to become allies or good friends with is aid. So this data set showcases which countries are helping each other the most and which ones are not helping certain countries.
-
-The most contributions made by anyone would be the EU which would make the most amount of sense considering its a group configured of lots of other countries, but they singulary have contributed the most other than any other organization or country
-
-The least amount of contributions made by anyone would be Monaco. Monaco is the second smallest indapendant state in the world so it makes the most sense why it would contribute the least if any at all.
-
-
-
-
-
-
-3 References
-https://quarto.org/docs/output-formats/html-basics.html
-
-https://quarto.org/docs/websites/
 </div>
 
 
